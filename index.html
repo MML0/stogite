@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="resource/main.css?v=2.49" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="shortcut icon" href="resource/favicon.png" type="image/x-icon">
+    <link rel="manifest" href="resource/manifest.json?v=2.419" />
+    <title>Game</title>
+  </head>
+  <body>
+    <div class="notification_div">
+     
+    </div>
+    <div class="header_div">
+      <div class="info"><i class="bi bi-info-circle"></i><br><span></span></div>
+      <div class="logo"><i class="bi bi-controller"></i></div>
+      <div class="nav"><i class="fa fa-bars"></i><br><span></span></div>
+    </div>
+    <div class="dark"></div>
+    <div class="loading" id="loading"><i class="bi bi-hourglass"></i></div>
+    <div class="info_div">
+      <p>contribute on github</p>
+      <p>Lorem ipsum dolor sit amet.</p>
+      <p>Lorem ipsum dolor sit. </p>
+      <div class="line"></div><br>
+      <a href="https://github.com/MML0/game_UI"><i class="bi bi-github"></i></a>
+      <a href="https://instagram.com/mml._.0"><i class="bi bi-instagram"></i></a>
+      <a href="https://t.me/"><i class="bi bi-telegram"></i></a>
+      <a href="https://youtube.com/"><i class="bi bi-youtube"></i></a>
+      <a href="https://discord.com/"><i class="bi bi-discord"></i></a>
+    </div>
+
+    <div class="main_content">
+      <div class="name_form login_section">
+        <div class="avatar"><i class="fa fa-pen"></i></div>
+        <span>NICKNAME:</span>
+        <input id="niresource/icon/stogite.pngkname" type="text" name="text" id="name" value="User" autocomplete="off" ><br>
+        <span>LANGUAGE:</span><br>
+        <select name="language"><optgroup label="Available Languages"><option selected="" value="1">فارسی</option><option value="2">English</option></select>
+      </div>
+      <button class="play_btn login_section" type="button"><i class="fas fa-gamepad" id="btnplay"></i><strong>PLAY!</strong></button><br>
+      <button class="room_btn login_section" type="button"><i class="fas fa-door-open"></i><strong>ROOMS</strong></button>
+
+
+
+      <div class="join_game_form join_section">
+        <div class="title"></div>
+        <h4>join room</h4>
+        <span>room code:</span>
+        <input id="nikname" type="text" name="text" id="name" placeholder="123abc" autocomplete="off" ><br>
+        <span>your id:</span>
+        <input id="nikname" type="text" name="text" id="name" placeholder="1~6" autocomplete="off" ><br>      
+      </div>
+      <button class="play_btn join_section" type="button"><i class="fas fa-gamepad" id="btnplay"></i><strong>JOIN!</strong></button><br>
+   
+
+
+      <div class="join_game_form creat_section">
+        <div class="title"></div>
+        <h4>creat room</h4>
+        <span>number of players:</span><br>
+        <select name="number" id="numberOfPlayers"><optgroup label="Number of Players"><option selected="" value="3">3</option><option value="4">4</option>
+            <option value="5">5</option><option value="6">6</option>
+        </select>
+      </div>
+      <button class="creat_btn creat_section" type="button"><i class="fas fa-gamepad" id="btnplay"></i><strong>CREAT</strong></button><br>
+   
+    </div>
+
+
+
+
+    <script src="resource/jquery-3.7.1.js"></script>
+    <script src="resource/main.js?v=2.49"></script>
+  </body>
+</html>
