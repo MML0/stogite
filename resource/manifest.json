@@ -1,7 +1,7 @@
 {
   "name": "stogite",
   "short_name": "Stogite",
-  "start_url": "/stogite",
+  "start_url": "/",
   "icons": [
     {
       "src": "/resource/icon/48.png",
@@ -36,6 +36,7 @@
   ],
   "id": "/?source=pwa",
   "background_color": "#0a5efb",
+  "offline_access": true,
   "display": "standalone",
   "scope": "/",
   "theme_color": "#0c40a0",

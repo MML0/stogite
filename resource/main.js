@@ -92,13 +92,33 @@ $(document).ready(function(){
     $('.info').click(function (e) { 
         if($('.info i').hasClass('fa-chevron-left')){
             //if user was in a game then go back to game menu
-            loading(1000);
-            
-            $('.info i').addClass("bi-info-circle").removeClass("fa-chevron-left").addClass("bi").removeClass("fa");
-            $('.login_section').css('display', 'block');
-            $('.join_section').css('display', 'none');
-            $('.creat_section').css('display', 'none');
-            loading(0);
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover your sanity !",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, lose it!",
+                closeOnConfirm: false
+              },
+              function(){
+                swal({
+                    title: "ok!",
+                    text: "bye.",
+                    timer: 0
+                  });
+                loading(1000);
+                $('.info i').addClass("bi-info-circle").removeClass("fa-chevron-left").addClass("bi").removeClass("fa");
+                $('.login_section').css('display', 'block');
+                $('.join_section').css('display', 'none');
+                $('.creat_section').css('display', 'none');
+                $('.desk_section').css('display', 'none');
+                $('.cards_desk').html('');
+
+                loading(0);
+
+              });
+             
         
         }else{
             //notify(txt='there is no purpose'  , 'failure' )
@@ -125,9 +145,9 @@ $(document).ready(function(){
     
     $('.room_btn').click(function (e) { 
         notify(txt= $('#nikname').val()+' '  , 'success' )
-        loading(1000);
+        loading(200);
+        $('.info i').removeClass("bi-info-circle").addClass("fa-chevron-left").removeClass("bi").addClass("fa");
         
-        //$('.info i').removeClass("bi-info-circle").addClass("fa-chevron-left").removeClass("bi").addClass("fa");
         $('.login_section').css('display', 'none');
         $('.creat_section').css('display', 'block');
 
@@ -135,20 +155,29 @@ $(document).ready(function(){
             //globalThis(numberOfPlayers)
             numberOfPlayers = $('#numberOfPlayers').val();
             notify(txt= numberOfPlayers+' '  , 'success' )
-            loading(1000);
+            loading(200);
             
             $('.info i').removeClass("bi-info-circle").addClass("fa-chevron-left").removeClass("bi").addClass("fa");
-            
-            $.get("games/join.html", function(data, status){
-                //alert("Data: " + data + "\nStatus: " + status);
-                $('.main_content').html(data);
-            });
-            //$('.main_content').html("<h1>hi</h1>");
-            loading(0);
-            
+            $('.login_section').css('display', 'none');
+            $('.creat_section').css('display', 'none');
+            $('.desk_section').css('display', 'block');
+            $('#add_card_number_input').keydown(function (e) { 
+                if (e.which === 13) {
+                    e.preventDefault()
+                    new_card_number = parseInt($('#add_card_number_input').val())
+                    if (isNaN(new_card_number)) {
+                        notify(txt= '?!!@$%'  , 'failure' )
+                    }else{
+                        $('.cards_desk').append(`<h3>${new_card_number}</h3>`);
+                        $('#add_card_number_input').val(' ')
+                    }
+                }
+            });            
         })
-        loading(0);
     })
+    //$('.room_btn').click();
+    //$('.creat_btn').click();
+
     //clear loading page
     setTimeout(function() {
         $('.loading').animate({'opacity': "0.0"}, 200,function(){$('.loading').css('display', 'none');})
