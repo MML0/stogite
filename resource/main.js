@@ -29,7 +29,6 @@ function shuffleArrayWithSeed(array, seed) {
       array[currentIndex] = array[randomIndex];
       array[randomIndex] = temporaryValue;
     }
-  
     return array;
   }
   
