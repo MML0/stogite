@@ -147,7 +147,9 @@ $(document).ready(function(){
                 $('.join_section').css('display', 'none');
                 $('.creat_section').css('display', 'none');
                 $('.desk_section').css('display', 'none');
+                $('.cards_in_hand').css('display', 'none');
                 $('.cards_desk').html('');
+                $('.cards_in_hand').html('');
 
                 loading(0);
 
@@ -178,7 +180,7 @@ $(document).ready(function(){
     
     $('#join_game_btn').click(function (e) { 
         loading(1000);
-        $(document).ready(function() {
+        
             // Define the POST data
             let room_code = parseInt($('#room_code_input').val());
             let username =  $('#nikname').val();
@@ -189,7 +191,7 @@ $(document).ready(function(){
           
             // Send POST request
             $.ajax({
-              url: '/resource/backend/join_room.php', // Path to your PHP script
+              url: 'resource/backend/join_room.php', // Path to your PHP script
               type: 'POST',
               data: postData,
               dataType: 'json', // Expect JSON response
@@ -203,18 +205,22 @@ $(document).ready(function(){
                     $('.info i').removeClass("bi-info-circle").addClass("fa-chevron-left").removeClass("bi").addClass("fa");
                     $('.login_section').css('display', 'none');
                     $('.join_section').css('display', 'none');
+                    $('.cards_in_hand').css('display', 'flex');
+
                     notify(txt= ' Joined '  , 'success' )
                     const all_cards = Array.from({ length: cards_count }, (_, i) => i + 1);
                     let shuffled_cards = shuffleArrayWithSeed(all_cards, room_code);
                     const numberOfPlayers = room_code%10
                     console.log(shuffled_cards,numberOfPlayers);
                     response.users.forEach((user, index) => {
+                        
                         play_cards = []
                         for(i=0;i<parseInt(cards_count/numberOfPlayers);i++){
                             play_cards.push(shuffled_cards.shift())
                         }
                         console.log(play_cards);
                     });
+                    notify(txt= response.users  , 'success' )
 
                     play_cards.forEach((card, index) => {
                         
@@ -263,7 +269,7 @@ $(document).ready(function(){
                 console.log('Error message:', errorResponse.message || 'Unknown error');
               }
             });
-          });
+        
           
 
 
@@ -282,7 +288,6 @@ $(document).ready(function(){
     })
     
     $('.creat_btn').click(function (e) { 
-        globalThis(numberOfPlayers)
         numberOfPlayers = parseInt($('#numberOfPlayers').val())
         notify(txt= numberOfPlayers+' '  , 'success' )
         loading(200);
@@ -299,7 +304,7 @@ $(document).ready(function(){
             room_code: room_id, 
           };
         $.ajax({
-            url: '/resource/backend/creat_room.php', 
+            url: 'resource/backend/creat_room.php', 
             type: 'POST',
             data: postData,
             success: function(response) {
@@ -318,23 +323,31 @@ $(document).ready(function(){
                 notify(txt= '?!!@$%'  , 'failure' )
             }else{
                 cards.push(new_card_number)
-                $('.cards_desk').append(`<div id="div_${new_card_number}" class="game_card"><img class"game_card_img" id="img_${new_card_number}" src="resource/cards/back1.jpg" alt="card"></div>`);
+                
+                $('.cards_desk').append(`<div id="div_${new_card_number}" class="game_card"><img class"game_card_img" id="img_${new_card_number}" src="resource/cards/back1.jpg" alt="card"></div>`) 
                 $('#div_'+new_card_number).animate({
                     opacity: 1,
                     filter: 'blur(0px);'
                   }, 1000);
                 $('#add_card_number_input').val(' ')
+
                 if (cards.length==numberOfPlayers){
+
                     $('#add_card_number_input').css('display', 'none');
                     $('#refresh_desk').css('display', 'block');
-                    cards.forEach((card, index) => {
+                    let cards2 = shuffleArrayWithSeed(cards, Date.now()%10000);
+                    $('.game_card img').each(function(index) {
                         const delay = index * 300;
                         setTimeout(() => {
-                            $('#img_'+card).fadeOut(10);
-                            $('#img_'+card).attr('src','resource/cards/'+card+'.jpg')
-                            $('#img_'+card).fadeIn(200);
+                            $(this).fadeOut(10);
+                            $(this).attr('src','resource/cards/'+cards2[index]+'.jpg')
+                            $(this).attr('card_code',''+cards2[index])
+                            $(this).fadeIn(200);
+                            console.log(cards2[index]);
                         }, delay);
+
                       });
+                    
                 }
             }
         }

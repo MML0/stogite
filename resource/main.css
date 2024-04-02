@@ -529,7 +529,7 @@ button i {
 /* desk for caeds in player hand section */
 .cards_in_hand{
     margin: 20px;
-    margin-top: 80px;
+    margin-top: 40px;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
@@ -542,7 +542,7 @@ button i {
 /* desk for caeds section */
 .cards_desk{
 
-    margin-top: 80px;
+    margin-top: 50px;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
