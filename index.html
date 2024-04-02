@@ -44,7 +44,7 @@
         <span>NICKNAME:</span>
         <input id="nikname" type="text" name="text" id="name" value="User" autocomplete="off" ><br>
         <span>LANGUAGE:</span><br>
-        <select name="language"><optgroup label="Available Languages"><option selected="" value="1">فارسی</option><option value="2">English</option></select>
+        <select name="language"><optgroup label="Available Languages"><option value="1">فارسی</option><option  selected="" value="2">English</option></select>
       </div>
       <button class="play_btn login_section" type="button"><i class="fas fa-gamepad" id="btnplay"></i><strong>PLAY!</strong></button><br>
       <button class="room_btn login_section" type="button"><i class="fas fa-door-open"></i><strong>ROOMS</strong></button>
@@ -55,11 +55,10 @@
         <div class="title"></div>
         <h4>join room</h4>
         <span>room code:</span>
-        <input id="nikname" type="text" name="text" id="name" placeholder="123abc" autocomplete="off" ><br>
-        <span>your id:</span>
-        <input id="nikname" type="text" name="text" id="name" placeholder="1~6" autocomplete="off" ><br>      
+        <input id="room_code_input" type="text" name="text" id="name" placeholder="123abc" autocomplete="off" ><br>
+         
       </div>
-      <button class="play_btn join_section" type="button"><i class="fas fa-gamepad" id="btnplay"></i><strong>JOIN!</strong></button><br>
+      <button id="join_game_btn" class="join_game_btn join_section" type="button"><i class="fas fa-gamepad" id="btnplay"></i><strong>JOIN!</strong></button><br>
    
 
 
@@ -67,8 +66,8 @@
         <div class="title"></div>
         <h4>creat room</h4>
         <span>number of players:</span><br>
-        <select name="number" id="numberOfPlayers"><optgroup label="Number of Players"><option selected="" value="3">3</option><option value="4">4</option>
-            <option value="5">5</option><option value="6">6</option>
+        <select name="number" id="numberOfPlayers"><optgroup label="Number of Players"><option  value="3">3</option><option value="4">4</option>
+            <option value="5">5</option><option selected="" value="6">6</option>
         </select>
       </div>
       <button class="creat_btn creat_section" type="button"><i class="fas fa-gamepad" id="btnplay"></i><strong>CREAT</strong></button><br>
@@ -76,8 +75,15 @@
 
       <div class="add_card_form desk_section">
         <input id="add_card_number_input" type="number" name="text" id="name" placeholder=" code " autocomplete="off" >
+        <button id="refresh_desk" type="button"><i class="fa fa-refresh"></i></button>
+        <div class="room_code">room code: <strong></strong> <i class="fa fa-chain" aria-hidden="true"></i></div>
       </div>
-      <div class="cards_desk"></div>
+      <div class="cards_desk">
+      </div>
+
+      <div class="cards_in_hand">
+        
+      </div>
 
     </div>
 
@@ -85,6 +91,6 @@
 
 
     <script src="resource/jquery-3.7.1.js"></script>
-    <script src="resource/main.js?v=2.49"></script>
+    <script src="resource/main.js?v=2.459"></script>
   </body>
 </html>
