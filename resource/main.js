@@ -38,6 +38,8 @@ function shuffleArrayWithSeed(array, seed) {
 $(document).ready(function(){
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         console.log('phone');
+        $('.cards_desk').css('justify-content', 'space-evenly');
+        $('.cards_in_hand').css('justify-content', 'space-evenly');
         
     }else{
         console.log('pc');
@@ -133,14 +135,9 @@ $(document).ready(function(){
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, lose it!",
-                closeOnConfirm: false
+                closeOnConfirm: true
               },
               function(){
-                swal({
-                    title: "ok!",
-                    text: "bye.",
-                    timer: 0
-                  });
                 loading(1000);
                 $('.info i').addClass("bi-info-circle").removeClass("fa-chevron-left").addClass("bi").removeClass("fa");
                 $('.login_section').css('display', 'block');
@@ -206,7 +203,6 @@ $(document).ready(function(){
                     $('.login_section').css('display', 'none');
                     $('.join_section').css('display', 'none');
                     $('.cards_in_hand').css('display', 'flex');
-
                     notify(txt= ' Joined '  , 'success' )
                     const all_cards = Array.from({ length: cards_count }, (_, i) => i + 1);
                     let shuffled_cards = shuffleArrayWithSeed(all_cards, room_code);
@@ -221,12 +217,10 @@ $(document).ready(function(){
                         console.log(play_cards);
                     });
                     notify(txt= response.users  , 'success' )
-
                     play_cards.forEach((card, index) => {
-                        
-                        const delay = index * 300;
+                        const delay = index * 250+100;
                         setTimeout(() => {
-                            $('.cards_in_hand').append(`<div id="div_${card}" class="game_card"><img class"game_card_img" id="img_${card}" src="resource/cards/back1.jpg" alt="card"></div>`);
+                            $('.cards_in_hand').append(`<div id="div_${card}" number="${card}" class="game_card in_hand_game_card"><img class"game_card_img" id="img_${card}" src="resource/cards/back1.jpg" alt="card"></div>`);
                             $('#div_'+card).animate({
                                 opacity: 1,
                                 filter: 'blur(0px);'
@@ -236,16 +230,36 @@ $(document).ready(function(){
                             $('#img_'+card).fadeIn(200);
                         }, delay);
                     });
-                
-
-
+                    setTimeout(() => {
+                        $('.in_hand_game_card').click(function (e) { 
+                            e.preventDefault();
+                            card = parseInt ($(this).attr('number'))
+                            code = card + 60 *parseInt(Math.random()*13) + 60 -1
+                            swal({
+                                title: "Are you sure?",
+                                text:`<span  class="on_card_number">${code}</span><img class"game_card_img" id="img_${card}" style="height:400px;" src="resource/cards/${card}.jpg" alt="card">` ,
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "send",
+                                closeOnConfirm: true,
+                                html: true
+                              },
+                              function(){
+                                setTimeout(() => {
+                                    $('#div_'+card).animate({'margin-left':'-200px','opacity':'0'}, 500);
+                                }, 100);
+                                setTimeout(() => {
+                                    $('#div_'+card).remove()
+                                    notify(txt= 'card num: '+code  , 'success' )                          
+                                }, 610);               
+                              });
+                        });
+                    }, numberOfPlayers*251+1000);
                 } else {
                   console.log('Username already exists in the room.');
                   notify(txt= 'your Username already exists in the room.'  , 'failure' )
-
                 }
-          
-                // Display user count
+                
                 console.log(`Total users in the room: ${response.userCount}`);
               },
               error: function(jqXHR, textStatus, errorThrown) {
@@ -289,7 +303,7 @@ $(document).ready(function(){
     
     $('.creat_btn').click(function (e) { 
         numberOfPlayers = parseInt($('#numberOfPlayers').val())
-        notify(txt= numberOfPlayers+' '  , 'success' )
+        //notify(txt= numberOfPlayers+' '  , 'success' )
         loading(200);
         
         $('.info i').removeClass("bi-info-circle").addClass("fa-chevron-left").removeClass("bi").addClass("fa");
@@ -298,8 +312,12 @@ $(document).ready(function(){
         $('.desk_section').css('display', 'block');
         cards = []
         $('.cards_desk').html('');
+        $('.cards_desk').css('display', 'flex');
+
         let room_id = Math.floor( Math.random() * 1000)*10+numberOfPlayers
         $('.room_code strong').html(room_id+'');
+        notify(txt= 'room code: '+room_id  , 'success' )
+
         const postData = {
             room_code: room_id, 
           };
@@ -320,7 +338,7 @@ $(document).ready(function(){
             e.preventDefault()
             new_card_number = parseInt($('#add_card_number_input').val())%60 + 1
             if (isNaN(new_card_number)||cards.includes(new_card_number)) {
-                notify(txt= '?!!@$%'  , 'failure' )
+                notify(txt= 'duplicated !'  , 'failure' )
             }else{
                 cards.push(new_card_number)
                 
@@ -342,10 +360,11 @@ $(document).ready(function(){
                             $(this).fadeOut(10);
                             $(this).attr('src','resource/cards/'+cards2[index]+'.jpg')
                             $(this).attr('card_code',''+cards2[index])
+                            $(this).before(`<span  class="on_card_number">${index+1}</span>`)
+                            
                             $(this).fadeIn(200);
                             console.log(cards2[index]);
                         }, delay);
-
                       });
                     
                 }
@@ -356,13 +375,15 @@ $(document).ready(function(){
         e.preventDefault();
         $('#add_card_number_input').css('display', 'block');
         $('#refresh_desk').css('display', 'none');
-        cards.forEach((card, index) => {
+        $('.game_card').each(function(index) {
+
             const delay = index * 300 + 100;
             setTimeout(() => {
-                $('#div_'+new_card_number).animate({'margin-left':'-200px'}, 300);
-                $('#div_'+card).fadeOut(200);
+                $(this).animate({'margin-left':'-200px','opacity':'0'}, 200);
+
             }, delay);
           });
+
         cards = []
         setTimeout(() => {$('.cards_desk').html('')}, 2000);
         
