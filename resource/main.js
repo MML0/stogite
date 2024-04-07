@@ -288,7 +288,7 @@ $(document).ready(function(){
                     });
                     notify(txt= response.users  , 'success' )
                     play_cards.forEach((card, index) => {
-                        const delay = index * 250+100;
+                        const delay = index * 200+100;
                         setTimeout(() => {
                             $('.cards_in_hand').append(`<div id="div_${card}" number="${card}" class="game_card in_hand_game_card"><img class"game_card_img" id="img_${card}" src="resource/cards/back1.jpg" alt="card"></div>`);
                             $('#div_'+card).animate({
@@ -346,7 +346,7 @@ $(document).ready(function(){
                                     });
                               });
                             });
-                    }, numberOfPlayers*251+1000);
+                    }, numberOfPlayers*351+5000);
                 } else {
                   console.log('Username already exists in the room.');
                   notify(txt= 'your Username already exists in the room.'  , 'failure' )
