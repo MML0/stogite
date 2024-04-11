@@ -152,9 +152,17 @@ $(document).ready(function(){
             $('.dark').animate({'opacity': "0.0"}, 200,function(){
                 $('.info_div').css('display', 'none');
                 $('.dark').css('display', 'none');
-            });
-            $('.info').trigger("click");
-
+            }); 
+            $('.pause_div').animate({'opacity': "0.0"}, 200)
+            $('.dark').animate({'opacity': "0.0"}, 200,function(){
+                $('.pause_div').css('display', 'none');
+                $('.dark').css('display', 'none');
+            }); 
+            if($('.info i').hasClass('fa-chevron-left')){
+                $('.info').trigger("click");
+            }
+            $('#58097945960').html('<script type="text/JavaScript" src="https://www.aparat.com/embed/cexuZ?data[rnddiv]=58097945960&data[responsive]=yes"></script>');
+            
             if(false){
                 $.get("games/index.html", function(data, status){
                     //alert("Data: " + data + "\nStatus: " + status);
@@ -165,7 +173,7 @@ $(document).ready(function(){
 
     window.addEventListener('beforeunload', function(e) {
         // Cancel the event
-        e.preventDefault();
+        //e.preventDefault();
         // Chrome requires returnValue to be set
         e.returnValue = '';
     });
@@ -176,6 +184,12 @@ $(document).ready(function(){
                 $('.info_div').css('display', 'none');
                 $('.dark').css('display', 'none');
             }); 
+        $('.pause_div').animate({'opacity': "0.0"}, 200)
+            $('.dark').animate({'opacity': "0.0"}, 200,function(){
+                $('.pause_div').css('display', 'none');
+                $('.dark').css('display', 'none');
+            }); 
+        $('#58097945960').html('<script type="text/JavaScript" src="https://www.aparat.com/embed/cexuZ?data[rnddiv]=58097945960&data[responsive]=yes"></script>');
     })
 
     $('#log_in').click(function (e) {
@@ -184,7 +198,13 @@ $(document).ready(function(){
     $('.nav').click(function (e) { 
         //$('.dark').css('display', 'block');
         //$('.info_div').css('display', 'block');
-        notify(txt='Loading ...'  , 'warning' )
+        $('.dark').css({'opacity': "0.0",'display': 'block'});
+        $('.pause_div').css({'opacity': "0.1","transform": "scale(1)",'display': 'block'});
+        $('.pause_div').animate({'opacity': "1","transform": "scale(1.0)"}, 200)
+        $('.dark').animate({'opacity': "1"}, 100)
+        statuss = ['failure','success','warning']
+        text = ['successfully failed ', 'Internal Server Error', 'Bad Request', 'Unauthorized', 'Forbidden', 'Gateway Timeout', 'Service Unavailable', 'Network Connection Error', 'DNS Resolution Failure', 'Cross-Origin Request Blocked', 'SSL/TLS Handshake Failure', 'Invalid URL', 'Invalid Input Data', 'Session Expired', 'Database Connection Error', 'File Upload Failure', 'Out of Memory Error', 'Script Error', 'Resource Not Available', 'Permission Denied', 'Session Timeout']
+        stat = statuss[Math.floor( Math.random() * statuss.length )]
 
         // if ($('.prof_pic').hasClass('shake')){
         // }else{
@@ -205,8 +225,8 @@ $(document).ready(function(){
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, lose it!",
                 closeOnConfirm: true
-              },
-              function(){
+                },
+                function(){
                 loading(1000);
                 $('.info i').addClass("bi-info-circle").removeClass("fa-chevron-left").addClass("bi").removeClass("fa");
                 $('.login_section').css('display', 'block');
@@ -218,19 +238,15 @@ $(document).ready(function(){
                 $('.cards_in_hand').html('');
                 loading(0);
 
-              });
+                });
+            }else{
+                $('.dark').css({'opacity': "0.0",'display': 'block'});
+                $('.info_div').css({'opacity': "0.1","transform": "scale(1)",'display': 'block'});
+                $('.info_div').animate({'opacity': "1","transform": "scale(1.0)"}, 200)
+                $('.dark').animate({'opacity': "1"}, 100)
+
+            }
              
-        
-        }else{
-            //notify(txt='there is no purpose'  , 'failure' )
-            $('.dark').css({'opacity': "0.0",'display': 'block'});
-            $('.info_div').css({'opacity': "0.1","transform": "scale(1)",'display': 'block'});
-            $('.info_div').animate({'opacity': "1","transform": "scale(1.0)"}, 200)
-            $('.dark').animate({'opacity': "1"}, 100)
-            statuss = ['failure','success','warning']
-            text = ['successfully failed ', 'Internal Server Error', 'Bad Request', 'Unauthorized', 'Forbidden', 'Gateway Timeout', 'Service Unavailable', 'Network Connection Error', 'DNS Resolution Failure', 'Cross-Origin Request Blocked', 'SSL/TLS Handshake Failure', 'Invalid URL', 'Invalid Input Data', 'Session Expired', 'Database Connection Error', 'File Upload Failure', 'Out of Memory Error', 'Script Error', 'Resource Not Available', 'Permission Denied', 'Session Timeout']
-            stat = statuss[Math.floor( Math.random() * statuss.length )]
-        }
     })
     
     $('.play_btn').click(function (e) { 
