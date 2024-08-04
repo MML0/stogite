@@ -1,19 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="resource/main.css?v=2.4219" />
+    <link rel="stylesheet" href="resource/main.css?v=3.1" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="shortcut icon" href="resource/favicon.png" type="image/x-icon">
-    <link rel="manifest" href="resource/manifest.json?v=2.34139" />
+    <link rel="manifest" href="resource/manifest.json?v=3.1" />
     <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
-    <title>Game</title>
+    <title>بازی</title>
+    <style>
+      @font-face {
+        font-family: yekan;
+        src: url(Yekan.ttf);
+      }
+      *{
+        font-family: yekan;
+      }
+      strong {
+        margin-top: -10px;
+        line-height: 0px;
+        font-size: 25px;
+        height: 25px;
+      }
+    </style>
   </head>
   <body>
     <div class="notification_div">
@@ -27,11 +42,11 @@
     <div class="dark"></div>
     <div class="loading" id="loading"><i class="bi bi-hourglass"></i></div>
     <div class="info_div">
-      <i>instructions</i>
+      <i>دستورات</i>
       <p>
-        Stojin is a game of creativity and mind-reading where players describe cards, and others try to guess them; clear descriptions risk losing points.
+        استوجین یک بازی خلاقیت و خواندن ذهن است که در آن بازیکنان کارت‌ها را توصیف می‌کنند و دیگران سعی می‌کنند آن‌ها را حدس بزنند؛ توصیفات واضح باخطر از دست دادن امتیاز روبرو هستند.
       </p>
-      <p>First, create a room using a separate phone (PC recommended), then join with other phones.</p>
+      <p>اول، با استفاده از یک تلفن جداگانه (توصیه می‌شود که از کامپیوتر استفاده کنید) یک اتاق ایجاد کنید، سپس با تلفن‌های دیگر وارد شوید.</p>
 
       <div id="58097945960">
         <script type="text/JavaScript" src="https://www.aparat.com/embed/cexuZ?data[rnddiv]=58097945960&data[responsive]=yes"></script>
@@ -47,9 +62,9 @@
 
 
     <div class="pause_div">
-      <i>pause</i>
-      <p>contribute on github</p>
-      <p>In Pause, Find Peace.</p>
+      <i>توقف</i>
+      <p>مشارکت در گیت‌هاب</p>
+      <p>در حالت توقف، آرامش را پیدا کنید.</p>
       <p>v3.1 </p>
       <div class="line"></div><br>
       <a target="_blank" href="https://github.com/MML0/stogite"><i class="bi bi-github"></i></a>
@@ -62,56 +77,44 @@
     <div class="main_content">
       <div class="name_form login_section">
         <div class="avatar"><i class="fa fa-check"></i></div>
-        <span>NICKNAME:</span>
-        <input id="nikname" type="text" name="text" id="name" value="User" autocomplete="off" ><br>
-        <span>LANGUAGE:</span><br>
-        <select name="language"><optgroup label="Available Languages"><option selected="" value="1">فارسی</option><option   value="2">English</option></select>
+        <span>نام مستعار:</span>
+        <input id="nikname" type="text" name="text" id="name" value="کاربر" autocomplete="off" ><br>
+        <span>زبان:</span><br>
+        <select name="language" id="language_select"><optgroup label="زبان‌های موجود"><option selected="" value="1">فارسی</option><option   value="2">انگلیسی</option></select>
       </div>
-      <button class="play_btn login_section" type="button"><i class="fas fa-gamepad" id="btnplay"></i><strong>PLAY!</strong></button><br>
-      <button class="room_btn login_section" type="button"><i class="fas fa-door-open"></i><strong>ROOMS</strong></button>
-
-
+      <button class="play_btn login_section" type="button"><i class="fas fa-gamepad" id="btnplay"></i><strong>شروع!</strong></button><br>
+      <button class="room_btn login_section" type="button"><i class="fas fa-door-open"></i><strong>اتاق‌ها</strong></button>
 
       <div class="join_game_form join_section">
         <div class="title"></div>
-        <h4>join room</h4>
-        <span>room code:</span>
-        <input id="room_code_input" type="text" name="text" id="name" placeholder="code..." autocomplete="off" ><br>
-         
+        <h4>ورود به اتاق</h4>
+        <span>کد اتاق:</span>
+        <input id="room_code_input" type="text" name="text" id="name" placeholder="کد..." autocomplete="off" ><br>
       </div>
-      <button id="join_game_btn" class="join_game_btn join_section" type="button"><i class="fas fa-gamepad" id="btnplay"></i><strong>JOIN!</strong></button><br>
-   
-
+      <button id="join_game_btn" class="join_game_btn join_section" type="button"><i class="fas fa-gamepad" id="btnplay"></i><strong>ورود!</strong></button><br>
 
       <div class="join_game_form creat_section">
         <div class="title"></div>
-        <h4>creat room</h4>
-        <span>number of players:</span><br>
-        <select name="number" id="numberOfPlayers"><optgroup label="Number of Players"><option  value="3">3</option><option value="4">4</option>
+        <h4>ایجاد اتاق</h4>
+        <span>تعداد بازیکنان:</span><br>
+        <select name="number" id="numberOfPlayers"><optgroup label="تعداد بازیکنان"><option  value="3">3</option><option value="4">4</option>
             <option value="5">5</option><option selected="" value="6">6</option>
         </select>
       </div>
-      <button class="creat_btn creat_section" type="button"><i class="fas fa-gamepad" id="btnplay"></i><strong>CREAT</strong></button><br>
-   
+      <button class="creat_btn creat_section" type="button"><i class="fas fa-gamepad" id="btnplay"></i><strong>ایجاد</strong></button><br>
 
       <div class="add_card_form desk_section">
-        <input id="add_card_number_input" type="number" name="text" id="name" placeholder=" code " autocomplete="off" >
+        <input id="add_card_number_input" type="number" name="text" id="name" placeholder="کد" autocomplete="off" >
         <button id="refresh_desk" type="button"><i class="fa fa-refresh"></i></button>
-        <div class="room_code">room code: <strong></strong> <i class="fa fa-chain" aria-hidden="true"></i></div>
+        <div class="room_code">کد اتاق: <strong></strong> <i class="fa fa-chain" aria-hidden="true"></i></div>
       </div>
       <div class="cards_desk">
       </div>
-
       <div class="cards_in_hand">
-        
       </div>
-
     </div>
 
-
-
-
     <script src="resource/jquery-3.7.1.js"></script>
-    <script src="resource/main.js?v=2.4539"></script>
+    <script src="resource/main.js?v=3.1"></script>
   </body>
 </html>

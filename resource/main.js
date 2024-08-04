@@ -117,6 +117,16 @@ function startUpdateCheck(room_code, username) {
     }, 3000); // 5000 milliseconds = 5 seconds
 }
 
+function reloadf (e) {
+    // Cancel the event
+    if ($('#language_select').val()){}
+    e.preventDefault();
+    // Chrome requires returnValue to be set
+    e.returnValue = '';
+}
+window.addEventListener('beforeunload', reloadf );
+
+
 $(document).ready(function(){
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         console.log('phone');
@@ -142,9 +152,16 @@ $(document).ready(function(){
     }); 
     $(window).trigger("resize");
 
+    $('#language_select').change(function(){
+        window.removeEventListener('beforeunload', reloadf);
+        var selectedValue = $(this).val();
+        if(selectedValue=='1'){ window.location.href = 'index.html';}
+        if(selectedValue=='2'){ window.location.href = 'en.html';}
 
-    //setTimeout(function(){$('.prof_pic').trigger( "click" );}, 5000) // fake notification
-
+        window.removeEventListener
+        // Call your function here or perform other actions
+        // yourFunction(selectedValue);
+    });
     window.history.pushState(null, "", window.location.href);        
     window.onpopstate = function() {
             window.history.pushState(null, "", window.location.href);
@@ -170,13 +187,6 @@ $(document).ready(function(){
                 });
             }
     };
-
-    window.addEventListener('beforeunload', function(e) {
-        // Cancel the event
-        //e.preventDefault();
-        // Chrome requires returnValue to be set
-        e.returnValue = '';
-    });
 
     $('.dark').click(function (e) { 
         $('.info_div').animate({'opacity': "0.0"}, 200)

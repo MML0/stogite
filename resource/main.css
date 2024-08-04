@@ -27,6 +27,7 @@ body{
     margin: 0;
 
 }
+
 @keyframes hover_shadow {
     0% {box-shadow: -3px 5px 8px -1px rgba(0,0,0,0.22);border: #adc2ee 2px solid ;}
     100% {box-shadow: 0px 0px 8px 4px rgba(0,0,0,0.62);  transform: scale(1.05);border: #a8c1f9 2px solid ;}
@@ -348,8 +349,7 @@ button i {
     text-shadow: 2px 1px #00000046;
 
     margin: auto 0px;
-    padding: 5px;
-    padding-left: 25px;
+    padding: 5px 25px;
     font-size:25px;
     margin-top: 20px;
 
@@ -371,7 +371,8 @@ button i {
     text-shadow: 3px 2px #00000046;
     height: fit-content;
     color: #ffffff;
-    margin-right: 25px;
+    padding: 5px 25px;
+
     font-size:22px;
     display: inline;
     justify-content: center;
